@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"strconv"
 	"sync"
+	"time"
 )
 
 var (
@@ -44,16 +45,18 @@ func GetArticle(w http.ResponseWriter, r *http.Request) {
 		start = (page - 1) * 10
 		end = 10
 	}
+	jobs := make(chan model.Article, 1)
+	var wg sync.WaitGroup
+	var m = new(sync.Mutex)
 
 	checkChace, _ := repository.GetCache(page)
 	if len(checkChace) > 0 {
+		fmt.Println("From Cache ", time.Now())
 		json.Unmarshal([]byte(checkChace), &articles)
 		resultOut = articles
 		count = len(checkChace)
 	} else {
-		jobs := make(chan model.Article, 1)
-		var wg sync.WaitGroup
-		var m = new(sync.Mutex)
+		fmt.Println("From DB", time.Now())
 
 		go func() {
 			wg.Add(1)

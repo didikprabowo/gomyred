@@ -29,7 +29,7 @@ func RunningAPI() {
 		WriteTimeout: cfg.Server.WriteTimeout * time.Second,
 	}
 
-	ch := make(chan os.Signal, 1)
+	ch := make(chan os.Signal)
 
 	signal.Notify(ch, os.Interrupt)
 
@@ -44,7 +44,6 @@ func RunningAPI() {
 				s.Shutdown(context.Background())
 			case <-ctx.Done():
 				return
-
 			}
 		}
 	}()
@@ -54,6 +53,7 @@ func RunningAPI() {
 		lg.Info = "Server"
 		lg.Error = err
 		lg.NewLogError()
+		fmt.Println(err)
 
 	}
 	fmt.Println("Stop server...")

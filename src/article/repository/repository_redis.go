@@ -48,5 +48,6 @@ func GetCache(page int) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	return val2, nil
 }
