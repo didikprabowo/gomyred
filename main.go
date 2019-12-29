@@ -21,7 +21,6 @@ func main() {
 		lg.Info = "MySQL"
 		lg.Error = err
 		lg.NewLogError()
-		return
 	}
 
 	_, err = repository.NewRedis(co)
@@ -30,7 +29,6 @@ func main() {
 		lg.Info = "Redis"
 		lg.Error = err
 		lg.NewLogError()
-		return
 	}
 
 	api.RunningAPI()

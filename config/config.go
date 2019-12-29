@@ -9,8 +9,10 @@ import (
 
 type (
 	Server struct {
-		Port int `config:"SERVER_PORT"`
-		TTL  int `config:"CACHE_TTL"`
+		Port         int           `config:"SERVER_PORT"`
+		TTL          int           `config:"CACHE_TTL"`
+		ReadTimeout  time.Duration `config:"SERVER_READ_TIMEOUT"`
+		WriteTimeout time.Duration `config:"SERVER_WRITE_TIMEOUT"`
 	}
 
 	MySQL struct {
@@ -81,14 +83,7 @@ func GetConfig() Config {
 		c <- cfg
 	}()
 
-	timeout := time.Second
-
-	select {
-	case <-c:
-		fmt.Println("")
-	case <-time.After(timeout):
-		fmt.Println("time out om")
-	}
+	<-c
 
 	wg.Wait()
 

@@ -23,6 +23,11 @@ func init() {
 
 // GetArticle
 func GetArticle(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method == "POST" {
+		return
+	}
+
 	var start, end, count int
 	resultOut := make([]model.Article, 0)
 	count = 0
@@ -45,9 +50,7 @@ func GetArticle(w http.ResponseWriter, r *http.Request) {
 		json.Unmarshal([]byte(checkChace), &articles)
 		resultOut = articles
 		count = len(checkChace)
-		fmt.Println("Data From Redis...")
 	} else {
-		fmt.Println("Data From  MySQL...")
 		jobs := make(chan model.Article, 1)
 		var wg sync.WaitGroup
 		var m = new(sync.Mutex)
