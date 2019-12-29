@@ -17,10 +17,6 @@ var (
 	dconf    config.Config
 )
 
-type newsFetchContainer struct {
-	Stack []model.Article `json:"Stack"`
-}
-
 func init() {
 	dconf = config.GetConfig()
 }
