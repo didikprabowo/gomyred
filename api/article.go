@@ -48,6 +48,7 @@ func GetArticle(w http.ResponseWriter, r *http.Request) {
 	if len(checkChace) > 0 {
 		json.Unmarshal([]byte(checkChace), &articles)
 		resultOut = articles
+		count = len(checkChace)
 		fmt.Println("Data From Redis...")
 	} else {
 		fmt.Println("Data From  MySQL...")
