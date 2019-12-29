@@ -39,7 +39,7 @@ func GetDB() *sql.DB {
 // GetAllArticle
 func GetAllArticle(jobs chan<- model.Article, wg *sync.WaitGroup, start int, end int) {
 	defer wg.Done()
-	q := fmt.Sprintf("SELECT id, title, body FROM news limit %d,%d",
+	q := fmt.Sprintf("SELECT id, title, body FROM news Order By id DESC limit %d,%d ",
 		start, end)
 	rows, err := dbCon.Query(q)
 	if err != nil {
