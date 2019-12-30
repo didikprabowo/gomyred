@@ -1,4 +1,4 @@
-# Example MySQL with Concurrency And Cache With Redis
+# MySQL with Concurrency And Redis
 
 ## How to Install and Running
 
