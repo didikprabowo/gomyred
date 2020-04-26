@@ -8,6 +8,4 @@
 4. Running Command :
 
    `go mod download`
-
    `go run main.go`
-
